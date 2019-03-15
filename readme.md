@@ -1,15 +1,19 @@
-Данный проект является частью статьи … и служит для создания, обучения и использования ансамблей нейронных сетей для аннотации ЭКГ
+This project is part of the [ECG Segmentation by Neural Networks: Errors and Correction](https://arxiv.org/abs/1812.10386) article and is used to create, train and use neural network ensembles for ECG annotation.
 
-Для использования проекта необходимы пакеты: tensorflow, keras и BaselineWanderRemoval
+REQUIREMENTS
+------------
+Packages are required to use the project: tensorflow, keras and BaselineWanderRemoval
 
-Для проведения экспериментов использовался датасет с ЭКГ LUDB http://www.cyberheart.unn.ru/database
+A [LUDB](http://www.cyberheart.unn.ru/database) dataset was used for the experiments. We used [json file](https://drive.google.com/file/d/1LGXwTUIO4vDfocK4qT03B9acnOpWbAaU/view?usp=sharing)
 
-В начале работы, нужно прописать в utils.py пути до папки с данными, а так же до рабочих директорий
+QUICK START
+-----------
+In the beginning, you need to specify in utils.py the path to the folder with the data and working directories
 
-Для обучения членов ансамбля необходимо запустить train_models.py. После окончания его работы в папке указанной в path_to_ensemble_models будут хранится файлы с обученными моделями, в path_to_ensemble_data - данные, на которых обучалась каждая из них
+To train members of the ensemble you need to run train_models.py. In result of his work in the folder specified in path_to_ensemble_models files with trained models will be stored. In path_to_ensemble_data stored data on which models were trained.
 
-Для использования обученных моделей для разметки, используется функция ensemble_predict из ensemble/make_ensemble.py, в ensemble/visualisation.py есть функции для визуализации результата, например, draw_one отрисовывает разметку сети и GT поверх ЭКГ
+To use trained models for annotation, use the ensemble_predict function from ensemble/make_ensemble.py. In ensemble/visualisation.py there are functions to visualize the result, for example, draw_one plot the network prediction and ground thruth with the ECG.
 
-Для создания сети-судьи поверх обученного ансамбля, необходимо использовать функцию train_judge из ensemble/judge.py. Для получения разметки с использованием судейской сети используется функция ensemble_predict_with_judge. Пример использования в main в judge.py
+To create a judge network trained on the members of the ensemble, you need to use the function train_judge from ensemble/judge.py. To obtain a annotation with the use of the judicial network, use the function ensemble_predict_with_judge. Usage example in main judge.py
 
-Для оценки результатов можно использовать функцию statistics из metrics.py, которая создаёт таблицу со значениями чувствительности, PPV, средним и дисперсией ошибок. Также есть графический метод оценки результата в файле ensemble.visualisation.py: ranging. При помощи него строится скаттерограмма значений F1 score на каждом из пациентов. 
+To evaluate the results, you can use the function named statistics from metrics.py, which creates a pandas table with sensitivity, PPV, mean, and error variance values. Also there is a graphical method of evaluate the result in a file ensemble.visualisation.py: ranging. Ranging is plotting scatterogram of F1 score values at each of the patients.
